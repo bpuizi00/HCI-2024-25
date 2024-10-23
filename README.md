@@ -24,7 +24,7 @@
 
 ### Semester Assignments
 
-- Link to Assignment 1: [**Assignment 1**](URL_TO_ASSIGNMENT_1) <!-- Replace with actual URL -->
+- Link to Assignment 1: [**Assignment 1**](https://fesb-my.sharepoint.com/:v:/g/personal/bpuizi00_fesb_hr/Eb1DZEEfB49JldXc9wPkmaUBHtfiaoUBlcBKyiICTdkUKQ?e=CVsCfc) <!-- Replace with actual URL -->
 - Link to Assignment 2: [**Assignment 2**](URL_TO_ASSIGNMENT_2) <!-- Replace with actual URL -->
 - Link to Assignment 3: [**Assignment 3**](URL_TO_ASSIGNMENT_3) <!-- Replace with actual URL -->
 <!-- Add more assignments as necessary -->
