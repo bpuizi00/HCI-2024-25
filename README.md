@@ -26,6 +26,7 @@
 
 - Link to Assignment 1: [**Assignment 1**](https://fesb-my.sharepoint.com/:v:/g/personal/bpuizi00_fesb_hr/Eb1DZEEfB49JldXc9wPkmaUBHtfiaoUBlcBKyiICTdkUKQ?e=CVsCfc) <!-- Replace with actual URL -->
 - Link to Assignment 2: [**Assignment 2**](https://github.com/bpuizi00/HCI-2024-25/blob/main/assignments/second/UserPersonas%20and%20Sitemap.pdf)
+- Link to Assingment 3: [**Assignment 3**](https://apartments-gamma.vercel.app/)
 <!-- Add more assignments as necessary -->
 
 ## Project Requirements
