@@ -15,8 +15,8 @@ const geistMono = localFont({
 });
 
 export const metadata: Metadata = {
-  title: "designmatters.",
-  description: "A design agency that cares about your business.",
+  title: "BI apartments agency.",
+  description: "Apartments agency from Dalmatia.",
 };
 
 export default function RootLayout({
