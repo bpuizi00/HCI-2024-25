@@ -29,6 +29,7 @@
 - Link to Assingment 3: [**Assignment 3**](https://hci-2024-25-taupe.vercel.app/)
 - Link to Assingment 4: [**Assignment 4**](https://github.com/bpuizi00/HCI-2024-25/blob/main/assignments/fourth.png)
 - Link to Assingment 5: [**Assignment 5**](https://hci-2024-25-n7f9.vercel.app/)
+- Link to Assignment 6: [**Assignment 5**](https://sixth-assignment-three.vercel.app/)
 
 <!-- Add more assignments as necessary -->
 
