@@ -24,7 +24,7 @@ export function HeroSection() {
       >
         <div className="absolute inset-0 bg-black/30" />
       </div>
-      <div className="relative z-10 pt-20 px-6">
+      <div className="relative z-9 pt-20 px-6">
         <h1 className="text-5xl font-bold text-white mb-12">
           Dalmatian Holiday Villas
         </h1>
@@ -38,6 +38,7 @@ export function HeroSection() {
                     id="location"
                     type="text"
                     value={location}
+                    placeholder="Enter location"
                     onChange={(e) => setLocation(e.target.value)}
                     className="w-full px-3 py-2 border rounded-md"
                   />
@@ -103,3 +104,4 @@ export function HeroSection() {
     </div>
   )
 }
+

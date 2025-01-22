@@ -22,7 +22,7 @@ const propertyTypes: PropertyType[] = [
 
 export function PropertyTypes() {
   return (
-    <section className="py-12 px-6">
+    <section className="py-12 px-6 md:px-12 lg:px-24">
       <h2 className="text-3xl font-bold mb-8">Browse by property type</h2>
       <div className="grid grid-cols-1 md:grid-cols-4 gap-6">
         {propertyTypes.map((type) => (

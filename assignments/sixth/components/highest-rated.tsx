@@ -36,7 +36,7 @@ const ratedProperties: RatedProperty[] = [
 
 export function HighestRated() {
   return (
-    <section className="py-12 px-6">
+    <section className="py-12 px-6 md:px-12 lg:px-24">
       <div className="flex items-center justify-between mb-8">
         <h2 className="text-3xl font-bold">Highest rated</h2>
         <button className="p-2">
