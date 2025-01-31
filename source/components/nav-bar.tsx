@@ -2,7 +2,6 @@
 
 import { useState } from "react"
 import Link from "next/link"
-import { Menu } from "lucide-react"
 import { Button } from "@/components/ui/button"
 import {
   Dialog,
@@ -117,7 +116,21 @@ export function NavBar() {
           className="text-gray-700 hover:text-blue-500 transition-colors relative w-8 h-8"
           aria-label="Toggle menu"
         >
-          <Menu className="h-8 w-8" />
+          <span
+            className={`block absolute h-0.5 w-8 bg-current transform transition duration-500 ease-in-out ${
+              isMobileMenuOpen ? "rotate-45 translate-y-0" : "-translate-y-2.5"
+            }`}
+          ></span>
+          <span
+            className={`block absolute h-0.5 w-8 bg-current transform transition duration-500 ease-in-out ${
+              isMobileMenuOpen ? "opacity-0" : "opacity-100"
+            }`}
+          ></span>
+          <span
+            className={`block absolute h-0.5 w-8 bg-current transform transition duration-500 ease-in-out ${
+              isMobileMenuOpen ? "-rotate-45 translate-y-0" : "translate-y-2.5"
+            }`}
+          ></span>
         </button>
       </div>
       {isMobileMenuOpen && (
