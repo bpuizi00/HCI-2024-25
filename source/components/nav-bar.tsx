@@ -31,7 +31,7 @@ export function NavBar() {
 
   return (
     <nav className="bg-white py-4 px-6 flex items-center justify-between relative">
-      <Link href="/" className="text-2xl font-bold text-blue-500">
+      <Link href="/" className="text-2xl font-bold md:px-10 lg:px-10 text-blue-500">
         Air<span className="text-cyan-400">B&I</span>
       </Link>
       <div className="hidden md:flex items-center gap-8 ml-auto">
