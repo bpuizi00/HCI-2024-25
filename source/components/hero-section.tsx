@@ -28,7 +28,7 @@ export function HeroSection() {
         <h1 className="text-5xl font-bold text-white mb-12">
           Dalmatian Holiday Villas
         </h1>
-        <Card className="max-w-4xl mx-auto bg-white/90 backdrop-blur">
+        <Card className="max-w-4xl mx-auto bg-white/80">
           <CardContent className="p-4">
             <div className="flex flex-col md:flex-row items-center gap-4">
               <div className="flex-grow grid grid-cols-1 md:grid-cols-4 gap-4">

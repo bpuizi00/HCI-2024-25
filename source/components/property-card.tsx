@@ -1,3 +1,4 @@
+"use client"
 import { Star } from 'lucide-react'
 import { Property } from "@/types/property"
 import { Button } from "@/components/ui/button"

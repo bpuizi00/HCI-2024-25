@@ -5,11 +5,12 @@ import { PropertyCard } from "@/components/property-card"
 import { HighestRated } from "@/components/highest-rated"
 import { Footer } from "@/components/footer"
 import { CurrentDeals } from "@/components/current-deals"
+import { LandingNavBar } from "@/components/landing-nav-bar"
 
-export default function Home() {
+export default function Page() {
   return (
     <main>
-      <NavBar />
+      <LandingNavBar />
       <HeroSection />
       <PropertyTypes />
       <CurrentDeals />

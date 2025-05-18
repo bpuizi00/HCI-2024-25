@@ -36,6 +36,7 @@ export function NavBar() {
       </Link>
       <div className="hidden md:flex items-center gap-8 ml-auto">
         {[
+          { name: "HOME", route: "/" },
           { name: "APARTMENTS", route: "/apartments" },
           { name: "GALLERY", route: "/gallery" },
           { name: "BOOK NOW", route: "/book-now" },

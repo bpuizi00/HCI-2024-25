@@ -14,6 +14,7 @@ const nextConfig = {
     ignoreBuildErrors: true,
   },
   images: {
+    domains: ["images.ctfassets.net", "downloads.ctfassets.net", "assets.ctfassets.net"],
     unoptimized: true,
   },
   experimental: {
