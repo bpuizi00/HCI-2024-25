@@ -40,37 +40,49 @@ export function LandingNavBar() {
           Air<span className={scrolled ? "text-cyan-400" : "text-cyan-300"}>B&I</span>
         </Link>
         <div className="hidden md:flex gap-8">
-          {[
-            { name: "HOME", route: "/" },
-            { name: "APARTMENTS", route: "/apartments" },
-            { name: "GALLERY", route: "/gallery" },
-            { name: "BOOK NOW", route: "/book-now" },
-            { name: "BLOG", route: "/blog" },
-            { name: "CONTACT", route: "/contact" },
-          ].map((item) => (
-            <Link
-              key={item.name}
-              href={item.route}
-              className={`${
-                scrolled ? "text-gray-700 hover:text-blue-500" : "text-white hover:text-cyan-300"
-              } transition-colors`}
-            >
-              {item.name}
-            </Link>
-          ))}
-          <Dialog open={isLoginOpen} onOpenChange={setIsLoginOpen}>
+        {[
+          { name: "HOME", route: "/" },
+          { name: "APARTMENTS", route: "/apartments" },
+          { name: "GALLERY", route: "/gallery" },
+          { name: "BOOK NOW", route: "/book-now" },
+          { name: "BLOG", route: "/blog" },
+          { name: "CONTACT", route: "/contact" },
+        ].map((item) => (
+          <Link
+            key={item.name}
+            href={item.route}
+            className={`${
+              scrolled ? "text-gray-700 hover:text-blue-500" : "text-white hover:text-cyan-300"
+            } transition-colors`}
+          >
+            {item.name}
+          </Link>
+        ))}
+            <Dialog open={isLoginOpen} onOpenChange={setIsLoginOpen}>
             <DialogTrigger asChild>
-              <Button
-                variant="outline"
-                className={`ml-4 px-4 py-2 rounded font-semibold transition-colors ${
-                  scrolled
-                    ? "text-white bg-blue-500 border-blue-500 hover:bg-blue-600"
-                    : "text-blue-500 bg-white border-blue-500 hover:bg-cyan-300"
-                }`}
+              <span
+                className={`
+                  border 
+                  border-white 
+                  rounded 
+                  px-4 
+                  py-2 
+                  font-bold 
+                  transition-colors 
+                  cursor-pointer 
+                  inline-flex 
+                  items-center 
+                  bg-transparent 
+                  text-white 
+                  hover:bg-white/10
+                  focus:outline-none
+                `}
                 onClick={handleLoginClick}
+                tabIndex={0}
+                role="button"
               >
                 Log in
-              </Button>
+              </span>
             </DialogTrigger>
             <DialogContent className="sm:max-w-[425px]">
               <DialogHeader>
@@ -120,7 +132,29 @@ export function LandingNavBar() {
             </DialogContent>
           </Dialog>
         </div>
-        <div className="md:hidden z-20"></div>
+<div className="md:hidden z-20">
+  <button
+    onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
+    className="text-white hover:text-cyan-300 transition-colors relative w-8 h-8 focus:outline-none"
+    aria-label="Toggle menu"
+  >
+    <span
+      className={`block absolute h-0.5 w-8 bg-current transform transition duration-500 ease-in-out ${
+        isMobileMenuOpen ? "rotate-45 translate-y-0" : "-translate-y-2.5"
+      }`}
+    ></span>
+    <span
+      className={`block absolute h-0.5 w-8 bg-current transform transition duration-500 ease-in-out ${
+        isMobileMenuOpen ? "opacity-0" : "opacity-100"
+      }`}
+    ></span>
+    <span
+      className={`block absolute h-0.5 w-8 bg-current transform transition duration-500 ease-in-out ${
+        isMobileMenuOpen ? "-rotate-45 translate-y-0" : "translate-y-2.5"
+      }`}
+    ></span>
+  </button>
+</div>
         {isMobileMenuOpen && (
           <div className="absolute top-full left-0 right-0 bg-white shadow-lg py-2 z-10">
             {[

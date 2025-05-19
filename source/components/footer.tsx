@@ -13,12 +13,12 @@ export function Footer() {
           </div>
           <div className="flex items-center space-x-4">
             {[
-              "/placeholder.svg?height=30&width=50",
-              "/placeholder.svg?height=30&width=50",
-              "/placeholder.svg?height=30&width=50",
-              "/placeholder.svg?height=30&width=50",
-              "/placeholder.svg?height=30&width=50",
-              "/placeholder.svg?height=30&width=50"
+              "/googlepay.svg?height=30&width=50",
+              "/applepay.svg?height=30&width=50",
+              "/visa.svg?height=30&width=50",
+              "/mastercard.svg?height=30&width=50",
+              "/paypal.svg?height=30&width=50",
+              "/bitcoin.svg?height=30&width=50"
             ].map((src, index) => (
               <Image
                 key={index}
