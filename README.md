@@ -19,7 +19,7 @@
 ### Semester Project
 
 - Link to your production version: [**Production Version**](https://hci-2024-25-tesh.vercel.app/) <!-- Replace with actual URL -->
-- Link to your final report: [**Final Report**](URL_TO_FINAL_REPORT) <!-- Replace with actual URL -->
+- Link to your final report: [**Final Report**](https://plump-purple-fd3.notion.site/AirB-I-Final-Report-17f793b7331b803fab4eee7afc72a8b8?pvs=74) <!-- Replace with actual URL -->
 <!-- Add more as necessary -->
 
 ### Semester Assignments
