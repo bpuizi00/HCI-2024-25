@@ -4,6 +4,9 @@ import './globals.css'
 export const metadata: Metadata = {
   title: 'AirB&I - Vacation Rentals',
   description: 'Find and book unique accommodations',
+    icons: {
+    icon: "/favicon.ico",
+  },
 }
 
 export default function RootLayout({

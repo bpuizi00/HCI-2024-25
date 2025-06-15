@@ -44,7 +44,7 @@ export function HeroSection() {
                   />
                 </div>
                 <div className="space-y-2">
-                  <label htmlFor="checkIn" className="text-sm font-medium">CHECK-IN</label>
+                  <label className="text-sm font-medium">CHECK-IN</label>
                   <Popover>
                     <PopoverTrigger asChild>
                       <Button variant="outline" className="w-full justify-start">
@@ -63,7 +63,7 @@ export function HeroSection() {
                   </Popover>
                 </div>
                 <div className="space-y-2">
-                  <label htmlFor="checkOut" className="text-sm font-medium">CHECK-OUT</label>
+                  <label className="text-sm font-medium">CHECK-OUT</label>
                   <Popover>
                     <PopoverTrigger asChild>
                       <Button variant="outline" className="w-full justify-start">

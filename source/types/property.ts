@@ -17,5 +17,6 @@ export interface Property {
 export interface PropertyType {
   title: string
   image: string
+  href: string
 }
 
