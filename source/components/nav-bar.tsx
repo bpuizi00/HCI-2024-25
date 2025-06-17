@@ -5,11 +5,13 @@ import Link from "next/link"
 import { Button } from "@/components/ui/button"
 import { LoginDialog } from "@/components/login-dialog"
 import { usePathname } from "next/navigation"
+import { useAuth } from "@/context/AuthContext"
 
 export function NavBar() {
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false)
   const [isLoginOpen, setIsLoginOpen] = useState(false)
   const pathname = usePathname()
+  const { isLoggedIn, logout } = useAuth()
 
   const navItems = [
     { name: "HOME", route: "/" },
@@ -41,13 +43,23 @@ export function NavBar() {
           setOpen={setIsLoginOpen}
           inputPrefix="desktop-"
           trigger={
-            <Button
-              variant="outline"
-              className="text-gray-700 border-blue-500 hover:bg-blue-500 hover:text-white transition-colors"
-              onClick={() => setIsLoginOpen(true)}
-            >
-              Log in
-            </Button>
+            isLoggedIn ? (
+              <Button
+                variant="outline"
+                className="text-gray-700 border-blue-500 hover:bg-blue-500 hover:text-white transition-colors"
+                onClick={logout}
+              >
+                Log Out
+              </Button>
+            ) : (
+              <Button
+                variant="outline"
+                className="text-gray-700 border-blue-500 hover:bg-blue-500 hover:text-white transition-colors"
+                onClick={() => setIsLoginOpen(true)}
+              >
+                Log in
+              </Button>
+            )
           }
         />
       </div>
@@ -96,13 +108,23 @@ export function NavBar() {
               setOpen={setIsLoginOpen}
               inputPrefix="mobile-"
               trigger={
-                <Button
-                  variant="outline"
-                  className="w-full text-gray-700 border-blue-500 hover:bg-blue-500 hover:text-white transition-colors"
-                  onClick={() => setIsLoginOpen(true)}
-                >
-                  Log in
-                </Button>
+                isLoggedIn ? (
+                  <Button
+                    variant="outline"
+                    className="w-full text-gray-700 border-blue-500 hover:bg-blue-500 hover:text-white transition-colors"
+                    onClick={logout}
+                  >
+                    Log Out
+                  </Button>
+                ) : (
+                  <Button
+                    variant="outline"
+                    className="w-full text-gray-700 border-blue-500 hover:bg-blue-500 hover:text-white transition-colors"
+                    onClick={() => setIsLoginOpen(true)}
+                  >
+                    Log in
+                  </Button>
+                )
               }
             />
           </div>

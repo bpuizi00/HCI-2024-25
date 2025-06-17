@@ -8,7 +8,7 @@ const currentDeals: Property[] = [
     location: "Bačvice",
     size: "65 m²",
     price: 230,
-    rating: 5,
+    rating: 9.4,
     features: ["Parking available"],
     image: "/maestro-studio.jpg?height=200&width=300",
     dateRange: "Dec. 20 - Dec. 23",
@@ -19,7 +19,7 @@ const currentDeals: Property[] = [
     location: "Visoka",
     size: "20 m²",
     price: 175,
-    rating: 5,
+    rating: 8.4,
     features: ["Wi-Fi available"],
     image: "/garsonjera.jpg?height=200&width=300",
     dateRange: "Dec. 18 - Dec. 22",
@@ -30,7 +30,7 @@ const currentDeals: Property[] = [
     location: "Blatine",
     size: "42 m²",
     price: 210,
-    rating: 5,
+    rating: 8.1,
     features: ["Breakfast included"],
     image: "/luka-apartment.jpg?height=200&width=300",
     dateRange: "Jan. 3 - Jan. 5",
@@ -40,9 +40,9 @@ const currentDeals: Property[] = [
 export function CurrentDeals() {
   return (
     <section className="py-12 px-6 md:px-12 lg:px-24">
-      <div className="flex items-center gap-2 mb-8">
-        <h2 className="text-3xl font-bold">Current deals</h2>
-        <span className="text-red-500">🔥</span>
+      <div className="flex items-center justify-center md:justify-start gap-2 mb-8">
+        <h2 className="text-3xl font-bold text-center md:text-left">Current deals</h2>
+        <span className="text-red-500 text-xl">🔥</span>
       </div>
       <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
         {currentDeals.map((property) => (

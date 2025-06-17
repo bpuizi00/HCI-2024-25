@@ -3,8 +3,13 @@
 import { useEffect, useState } from "react"
 import { NavBar } from "@/components/nav-bar"
 import { Footer } from "@/components/footer"
-import { FAQ, FAQItem } from "@/components/faq"
 import { useAuth } from "@/context/AuthContext"
+import { Accordion, AccordionItem, AccordionTrigger, AccordionContent } from "@/components/ui/accordion"
+
+type FAQItem = {
+  question: string
+  answer: string
+}
 
 const initialFaqs: FAQItem[] = [
   {
@@ -64,6 +69,11 @@ export default function Contact() {
     setTimeout(() => setSubmitted(false), 2000)
   }
 
+  // Delete FAQ by index
+  const handleDeleteFAQ = (index: number) => {
+    setFaqs(prev => prev.filter((_, i) => i !== index))
+  }
+
   return (
     <div className="min-h-screen flex flex-col">
       <NavBar />
@@ -73,7 +83,7 @@ export default function Contact() {
             Logged in as Admin!
           </div>
         )}
-        {/* <h1 className="text-4xl font-bold mb-8 text-center">Contact</h1> */}
+        <h1 className="text-4xl font-bold mb-8 text-center">Contact</h1>
         <div className="max-w-3xl w-full mx-auto">
           <div className="grid md:grid-cols-2 gap-12 mb-12">
             <div>
@@ -104,8 +114,35 @@ export default function Contact() {
             </div>
           </div>
         </div>
-        {/* Only render FAQ after mount to avoid hydration error */}
-        {isMounted && <FAQ faqs={faqs} />}
+        {/* FAQ Accordion with arrow and delete */}
+        {isMounted && (
+          <div className="max-w-3xl w-full mx-auto mb-8">
+            <h2 className="text-2xl font-bold mb-6">Frequently Asked Questions</h2>
+            <Accordion type="single" collapsible className="w-full">
+              {faqs.map((faq, idx) => (
+                <AccordionItem key={idx} value={`item-${idx}`}>
+                  <div className="flex items-center justify-between">
+                    <AccordionTrigger className="text-left flex-1">
+                      {faq.question}
+                    </AccordionTrigger>
+                    {isLoggedIn && (
+                      <button
+                        className="ml-4 bg-red-500 text-white px-4 py-2 rounded hover:bg-red-600 transition"
+                        onClick={() => handleDeleteFAQ(idx)}
+                        type="button"
+                      >
+                        Delete
+                      </button>
+                    )}
+                  </div>
+                  <AccordionContent>
+                    {faq.answer}
+                  </AccordionContent>
+                </AccordionItem>
+              ))}
+            </Accordion>
+          </div>
+        )}
         {isLoggedIn && isMounted && (
           <div className="mt-12 max-w-3xl w-full mx-auto">
             <h2 className="text-2xl font-bold mb-4">Add FAQ</h2>

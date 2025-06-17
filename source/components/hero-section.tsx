@@ -13,6 +13,13 @@ export function HeroSection() {
   const [checkOut, setCheckOut] = useState<Date>()
   const [guests, setGuests] = useState(1)
   const [location, setLocation] = useState('')
+  const [showMsg, setShowMsg] = useState(false)
+
+  const handleSearch = (e: React.FormEvent) => {
+    e.preventDefault()
+    setShowMsg(true)
+    setTimeout(() => setShowMsg(false), 2500)
+  }
 
   return (
     <div className="relative h-[700px] md:h-[600px] flex items-center justify-center">
@@ -25,79 +32,87 @@ export function HeroSection() {
         <div className="absolute inset-0 bg-black/30" />
       </div>
       <div className="relative z-9 pt-20 px-6">
-        <h1 className="text-5xl font-bold text-white mb-12">
-          Dalmatian Holiday Villas
+        <h1 className="font-bold text-white mb-12">
+          <span className="block md:hidden text-4xl">Dalmatian Villas</span>
+          <span className="hidden md:block text-5xl">Dalmatian Holiday Villas</span>
         </h1>
         <Card className="max-w-4xl mx-auto bg-white/80">
           <CardContent className="p-4">
-            <div className="flex flex-col md:flex-row items-center gap-4">
-              <div className="flex-grow grid grid-cols-1 md:grid-cols-4 gap-4">
-                <div className="space-y-2">
-                  <label htmlFor="location" className="text-sm font-medium">WHERE</label>
-                  <input
-                    id="location"
-                    type="text"
-                    value={location}
-                    placeholder="Enter location"
-                    onChange={(e) => setLocation(e.target.value)}
-                    className="w-full px-3 py-2 border rounded-md"
-                  />
+            <form onSubmit={handleSearch}>
+              <div className="flex flex-col md:flex-row items-center gap-4">
+                <div className="flex-grow grid grid-cols-1 md:grid-cols-4 gap-4">
+                  <div className="space-y-2">
+                    <label htmlFor="location" className="text-sm font-medium">WHERE</label>
+                    <input
+                      id="location"
+                      type="text"
+                      value={location}
+                      placeholder="Enter location"
+                      onChange={(e) => setLocation(e.target.value)}
+                      className="w-full px-3 py-2 border rounded-md"
+                    />
+                  </div>
+                  <div className="space-y-2">
+                    <label className="text-sm font-medium">CHECK-IN</label>
+                    <Popover>
+                      <PopoverTrigger asChild>
+                        <Button variant="outline" className="w-full justify-start">
+                          {checkIn ? format(checkIn, 'PPP') : 'Select Date'}
+                          <CalendarIcon className="ml-2 h-4 w-4" />
+                        </Button>
+                      </PopoverTrigger>
+                      <PopoverContent className="w-auto p-0">
+                        <Calendar
+                          mode="single"
+                          selected={checkIn}
+                          onSelect={setCheckIn}
+                          initialFocus
+                        />
+                      </PopoverContent>
+                    </Popover>
+                  </div>
+                  <div className="space-y-2">
+                    <label className="text-sm font-medium">CHECK-OUT</label>
+                    <Popover>
+                      <PopoverTrigger asChild>
+                        <Button variant="outline" className="w-full justify-start">
+                          {checkOut ? format(checkOut, 'PPP') : 'Select Date'}
+                          <CalendarIcon className="ml-2 h-4 w-4" />
+                        </Button>
+                      </PopoverTrigger>
+                      <PopoverContent className="w-auto p-0">
+                        <Calendar
+                          mode="single"
+                          selected={checkOut}
+                          onSelect={setCheckOut}
+                          initialFocus
+                        />
+                      </PopoverContent>
+                    </Popover>
+                  </div>
+                  <div className="space-y-2">
+                    <label htmlFor="guests" className="text-sm font-medium">GUESTS</label>
+                    <input
+                      id="guests"
+                      type="number"
+                      value={guests}
+                      onChange={(e) => setGuests(Number(e.target.value))}
+                      className="w-full px-3 py-2 border rounded-md"
+                      min="1"
+                    />
+                  </div>
                 </div>
-                <div className="space-y-2">
-                  <label className="text-sm font-medium">CHECK-IN</label>
-                  <Popover>
-                    <PopoverTrigger asChild>
-                      <Button variant="outline" className="w-full justify-start">
-                        {checkIn ? format(checkIn, 'PPP') : 'Select Date'}
-                        <CalendarIcon className="ml-2 h-4 w-4" />
-                      </Button>
-                    </PopoverTrigger>
-                    <PopoverContent className="w-auto p-0">
-                      <Calendar
-                        mode="single"
-                        selected={checkIn}
-                        onSelect={setCheckIn}
-                        initialFocus
-                      />
-                    </PopoverContent>
-                  </Popover>
-                </div>
-                <div className="space-y-2">
-                  <label className="text-sm font-medium">CHECK-OUT</label>
-                  <Popover>
-                    <PopoverTrigger asChild>
-                      <Button variant="outline" className="w-full justify-start">
-                        {checkOut ? format(checkOut, 'PPP') : 'Select Date'}
-                        <CalendarIcon className="ml-2 h-4 w-4" />
-                      </Button>
-                    </PopoverTrigger>
-                    <PopoverContent className="w-auto p-0">
-                      <Calendar
-                        mode="single"
-                        selected={checkOut}
-                        onSelect={setCheckOut}
-                        initialFocus
-                      />
-                    </PopoverContent>
-                  </Popover>
-                </div>
-                <div className="space-y-2">
-                  <label htmlFor="guests" className="text-sm font-medium">GUESTS</label>
-                  <input
-                    id="guests"
-                    type="number"
-                    value={guests}
-                    onChange={(e) => setGuests(Number(e.target.value))}
-                    className="w-full px-3 py-2 border rounded-md"
-                    min="1"
-                  />
-                </div>
+                <Button type="submit" className="w-full md:w-auto mt-4 md:mt-0">
+                  <Search className="mr-2 h-4 w-4" />
+                  Search
+                </Button>
               </div>
-              <Button className="w-full md:w-auto mt-4 md:mt-0">
-                <Search className="mr-2 h-4 w-4" />
-                Search
-              </Button>
-            </div>
+              {showMsg && (
+                <div className="mt-4 text-center text-red-600 font-semibold">
+                  Sorry, this functionality is still unavailable
+                </div>
+              )}
+            </form>
           </CardContent>
         </Card>
       </div>

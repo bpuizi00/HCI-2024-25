@@ -4,11 +4,13 @@ import { useState, useEffect } from "react"
 import Link from "next/link"
 import { Button } from "@/components/ui/button"
 import { LoginDialog } from "@/components/login-dialog"
+import { useAuth } from "@/context/AuthContext"
 
 export function LandingNavBar() {
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false)
   const [scrolled, setScrolled] = useState(false)
   const [isLoginOpen, setIsLoginOpen] = useState(false)
+  const { isLoggedIn, logout } = useAuth()
 
   useEffect(() => {
     const handleScroll = () => setScrolled(window.scrollY > 10)
@@ -54,36 +56,64 @@ export function LandingNavBar() {
             setOpen={setIsLoginOpen}
             inputPrefix="desktop-"
             trigger={
-              <span
-                className={`
-                  border
-                  ${scrolled
-                    ? "border-gray-700 text-gray-700 hover:bg-gray-100 hover:text-blue-500"
-                    : "border-white text-white hover:bg-white/10"}
-                  rounded
-                  px-4
-                  py-2
-                  font-bold
-                  transition-colors
-                  cursor-pointer
-                  inline-flex
-                  items-center
-                  bg-transparent
-                  focus:outline-none
-                `}
-                onClick={() => setIsLoginOpen(true)}
-                tabIndex={0}
-                role="button"
-              >
-                Log in
-              </span>
+              isLoggedIn ? (
+                <span
+                  className={`
+                    border
+                    ${scrolled
+                      ? "border-gray-700 text-gray-700 hover:bg-gray-100 hover:text-blue-500"
+                      : "border-white text-white hover:bg-white/10"}
+                    rounded
+                    px-4
+                    py-2
+                    font-bold
+                    transition-colors
+                    cursor-pointer
+                    inline-flex
+                    items-center
+                    bg-transparent
+                    focus:outline-none
+                  `}
+                  onClick={logout}
+                  tabIndex={0}
+                  role="button"
+                >
+                  Log Out
+                </span>
+              ) : (
+                <span
+                  className={`
+                    border
+                    ${scrolled
+                      ? "border-gray-700 text-gray-700 hover:bg-gray-100 hover:text-blue-500"
+                      : "border-white text-white hover:bg-white/10"}
+                    rounded
+                    px-4
+                    py-2
+                    font-bold
+                    transition-colors
+                    cursor-pointer
+                    inline-flex
+                    items-center
+                    bg-transparent
+                    focus:outline-none
+                  `}
+                  onClick={() => setIsLoginOpen(true)}
+                  tabIndex={0}
+                  role="button"
+                >
+                  Log in
+                </span>
+              )
             }
           />
         </div>
         <div className="md:hidden z-20">
           <button
             onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
-            className="text-white hover:text-cyan-300 transition-colors relative w-8 h-8 focus:outline-none"
+            className={`transition-colors relative w-8 h-8 focus:outline-none ${
+              scrolled ? "text-blue-500" : "text-white"
+            }`}
             aria-label="Toggle menu"
           >
             <span
@@ -121,13 +151,23 @@ export function LandingNavBar() {
                 setOpen={setIsLoginOpen}
                 inputPrefix="mobile-"
                 trigger={
-                  <Button
-                    variant="outline"
-                    className="w-full text-gray-700 border-blue-500 hover:bg-blue-500 hover:text-white transition-colors"
-                    onClick={() => setIsLoginOpen(true)}
-                  >
-                    Log in
-                  </Button>
+                  isLoggedIn ? (
+                    <Button
+                      variant="outline"
+                      className="w-full text-gray-700 border-blue-500 hover:bg-blue-500 hover:text-white transition-colors"
+                      onClick={logout}
+                    >
+                      Log Out
+                    </Button>
+                  ) : (
+                    <Button
+                      variant="outline"
+                      className="w-full text-gray-700 border-blue-500 hover:bg-blue-500 hover:text-white transition-colors"
+                      onClick={() => setIsLoginOpen(true)}
+                    >
+                      Log in
+                    </Button>
+                  )
                 }
               />
             </div>

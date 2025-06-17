@@ -1,5 +1,4 @@
 "use client"
-import { Star } from 'lucide-react'
 import { Property } from "@/types/property"
 import { Button } from "@/components/ui/button"
 import { Card, CardContent, CardFooter } from "@/components/ui/card"
@@ -14,15 +13,9 @@ export function PropertyCard({ property }: { property: Property }) {
           alt={property.name}
           className="w-full h-full object-cover"
         />
-        <div className="absolute top-2 right-2 flex gap-1">
-          {[...Array(5)].map((_, i) => (
-            <Star
-              key={i}
-              className={`w-4 h-4 ${
-                i < property.rating ? "text-yellow-400 fill-yellow-400" : "text-gray-300"
-              }`}
-            />
-          ))}
+        {/* Rating badge in top-right */}
+        <div className="absolute top-2 right-2 bg-white rounded-full px-2 py-1">
+          <span className="text-blue-500 font-bold">{property.rating}</span>
         </div>
       </div>
       <CardContent className="p-4">

@@ -176,3 +176,23 @@ export async function checkContentTypes() {
     return []
   }
 }
+
+const client = createClient({
+  space: process.env.CONTENTFUL_SPACE_ID!,
+  accessToken: process.env.CONTENTFUL_ACCESS_TOKEN!,
+})
+
+export async function getAllBlogs() {
+  const res = await client.getEntries({
+    content_type: "blogtext",
+    order: ["-sys.createdAt"],
+  })
+  return res.items.map((entry: any) => ({
+    slug: entry.fields.slug,
+    title: entry.fields.title,
+    description: entry.fields.text, 
+    imageUrl: entry.fields.image?.fields?.file?.url
+      ? "https:" + entry.fields.image.fields.file.url
+      : "/placeholder.jpg",
+  }))
+}

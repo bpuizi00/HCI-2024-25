@@ -1,6 +1,39 @@
 import Image from "next/image"
 import Link from "next/link"
 
+const paymentMethods = [
+  {
+    src: "/googlepay.svg?height=30&width=50",
+    alt: "Google Pay",
+    href: "https://pay.google.com/",
+  },
+  {
+    src: "/applepay.svg?height=30&width=50",
+    alt: "Apple Pay",
+    href: "https://www.apple.com/apple-pay/",
+  },
+  {
+    src: "/visa.svg?height=30&width=50",
+    alt: "Visa",
+    href: "https://www.visa.com/",
+  },
+  {
+    src: "/mastercard.svg?height=30&width=50",
+    alt: "Mastercard",
+    href: "https://www.mastercard.com/",
+  },
+  {
+    src: "/paypal.svg?height=30&width=50",
+    alt: "PayPal",
+    href: "https://www.paypal.com/",
+  },
+  {
+    src: "/bitcoin.svg?height=30&width=50",
+    alt: "Bitcoin",
+    href: "https://bitcoin.org/",
+  },
+]
+
 export function Footer() {
   return (
     <footer className="bg-gray-50 py-8 mt-12">
@@ -12,22 +45,22 @@ export function Footer() {
             <p>OIB: 26941009981</p>
           </div>
           <div className="flex items-center space-x-4">
-            {[
-              "/googlepay.svg?height=30&width=50",
-              "/applepay.svg?height=30&width=50",
-              "/visa.svg?height=30&width=50",
-              "/mastercard.svg?height=30&width=50",
-              "/paypal.svg?height=30&width=50",
-              "/bitcoin.svg?height=30&width=50"
-            ].map((src, index) => (
-              <Image
+            {paymentMethods.map((method, index) => (
+              <a
                 key={index}
-                src={src || "/placeholder.svg"}
-                alt="Payment method"
-                width={50}
-                height={30}
-                className="h-8 w-auto"
-              />
+                href={method.href}
+                target="_blank"
+                rel="noopener noreferrer"
+                aria-label={method.alt}
+              >
+                <Image
+                  src={method.src}
+                  alt={method.alt}
+                  width={50}
+                  height={30}
+                  className="h-8 w-auto"
+                />
+              </a>
             ))}
           </div>
           <div className="flex space-x-4 text-gray-600">

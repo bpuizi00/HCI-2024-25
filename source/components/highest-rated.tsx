@@ -37,24 +37,8 @@ const ratedProperties: RatedProperty[] = [
 export function HighestRated() {
   return (
     <section className="py-12 px-6 md:px-12 lg:px-24">
-      <div className="flex items-center justify-between mb-8">
-        <h2 className="text-3xl font-bold">Highest rated</h2>
-        <button className="p-2">
-          <span className="sr-only">Filter</span>
-          <svg
-            width="24"
-            height="24"
-            viewBox="0 0 24 24"
-            fill="none"
-            stroke="currentColor"
-            strokeWidth="2"
-            strokeLinecap="round"
-            strokeLinejoin="round"
-            className="w-5 h-5"
-          >
-            <path d="M22 3H2l8 9.46V19l4 2v-8.54L22 3z" />
-          </svg>
-        </button>
+      <div className="mb-8">
+        <h2 className="text-3xl font-bold text-center md:text-left">Highest rated</h2>
       </div>
       <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
         {ratedProperties.map((property) => (
