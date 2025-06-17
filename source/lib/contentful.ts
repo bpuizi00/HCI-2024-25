@@ -14,8 +14,8 @@ export const contentfulClient = createClient({
   accessToken,
 })
 
-// Define types based on your Contentful content model
-export interface ApartmentCard {
+// Shared card type for Apartment, Hotel, Studio, etc.
+export interface PropertyCard {
   name: string
   location?: {
     lat: number
@@ -33,46 +33,40 @@ export interface ApartmentCard {
   }
 }
 
-export async function getApartmentCards(): Promise<ApartmentCard[]> {
-  try {
-    console.log("Fetching apartment entries")
+// Helper to capitalize first letter
+function capitalize(str: string) {
+  return str.charAt(0).toUpperCase() + str.slice(1)
+}
 
-    // Try both uppercase and lowercase content type IDs
+// Generic function to fetch cards by content type
+async function getPropertyCardsByType(contentType: string): Promise<PropertyCard[]> {
+  try {
+    console.log(`Fetching ${contentType} entries`)
+
+    // Try both lowercase and uppercase content type IDs
     let entries = await contentfulClient.getEntries({
-      content_type: "apartment", // lowercase first
+      content_type: contentType.toLowerCase(),
       include: 10,
     })
 
-    // If no entries found, try with uppercase
     if (entries.items.length === 0) {
-      console.log("No entries found with lowercase 'apartment', trying uppercase 'Apartment'")
+      console.log(`No entries found with lowercase '${contentType}', trying uppercase '${capitalize(contentType)}'`)
       entries = await contentfulClient.getEntries({
-        content_type: "Apartment", // uppercase
+        content_type: capitalize(contentType),
         include: 10,
       })
     }
 
-    console.log(`Fetched ${entries.items.length} apartment entries`)
+    console.log(`Fetched ${entries.items.length} ${contentType} entries`)
 
-    // Log the raw entries to see their structure
-    console.log("Raw entries:", JSON.stringify(entries.items, null, 2))
-
-    // Transform entries into our ApartmentCard type
     return entries.items.map((item) => {
       const fields = item.fields as any
-      console.log(`Processing entry ${item.sys.id} with fields:`, fields)
 
-      // Extract the rich text content as plain text
       const extractRichText = (richTextField: { content: any[] }) => {
         if (!richTextField) return ""
-
-        // If it's already a string, return it
         if (typeof richTextField === "string") return richTextField
-
-        // If it has content property (rich text format)
         if (richTextField.content) {
           try {
-            // Try to extract text from the first paragraph
             return richTextField.content
               .filter((node) => node.nodeType === "paragraph")
               .map((node) =>
@@ -87,45 +81,32 @@ export async function getApartmentCards(): Promise<ApartmentCard[]> {
             return ""
           }
         }
-
         return ""
       }
 
-      // Extract image URL from the picture field
       let pictureUrl = "/placeholder.svg?height=400&width=600"
-      let pictureTitle = fields.name || "Apartment Image"
+      let pictureTitle = fields.name || `${capitalize(contentType)} Image`
 
-      // Check if picture field exists and has the expected structure
       if (fields.image) {
-        console.log("Picture field found:", fields.image)
-
-        // Handle different possible structures of the picture field
         if (fields.image.fields && fields.image.fields.file) {
-          // Standard asset reference
           pictureUrl = fields.image.fields.file.url || pictureUrl
           pictureTitle = fields.image.fields.title || pictureTitle
-
-          // Make sure URL is absolute
           if (pictureUrl && !pictureUrl.startsWith("http")) {
             pictureUrl = `https:${pictureUrl}`
           }
         } else if (fields.image.file) {
-          // Direct file object
           pictureUrl = fields.image.file.url || pictureUrl
           pictureTitle = fields.image.title || pictureTitle
-
-          // Make sure URL is absolute
           if (pictureUrl && !pictureUrl.startsWith("http")) {
             pictureUrl = `https:${pictureUrl}`
           }
         } else if (typeof fields.image === "string") {
-          // Direct URL string
           pictureUrl = fields.image
         }
       }
 
       return {
-        name: fields.name || "Unnamed Apartment",
+        name: fields.name || `Unnamed ${capitalize(contentType)}`,
         location: fields.location || null,
         size: extractRichText(fields.size) || "",
         price: extractRichText(fields.price) || "",
@@ -140,7 +121,7 @@ export async function getApartmentCards(): Promise<ApartmentCard[]> {
       }
     })
   } catch (error) {
-    console.error("Error fetching apartment cards:", error)
+    console.error(`Error fetching ${contentType} cards:`, error)
     if (error instanceof Error) {
       console.error("Error name:", error.name)
       console.error("Error message:", error.message)
@@ -148,6 +129,19 @@ export async function getApartmentCards(): Promise<ApartmentCard[]> {
     }
     return []
   }
+}
+
+// Specific functions for each property type
+export function getApartmentCards(): Promise<PropertyCard[]> {
+  return getPropertyCardsByType("apartment")
+}
+
+export function getHotelCards(): Promise<PropertyCard[]> {
+  return getPropertyCardsByType("hotels")
+}
+
+export function getStudioCards(): Promise<PropertyCard[]> {
+  return getPropertyCardsByType("studio")
 }
 
 // Function to fetch all entries regardless of content type

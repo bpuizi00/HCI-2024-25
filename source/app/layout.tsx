@@ -1,10 +1,11 @@
 import type { Metadata } from 'next'
+import { AuthProvider } from "@/context/AuthContext"
 import './globals.css'
 
 export const metadata: Metadata = {
   title: 'AirB&I - Vacation Rentals',
   description: 'Find and book unique accommodations',
-    icons: {
+  icons: {
     icon: "/favicon.ico",
   },
 }
@@ -17,7 +18,9 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body className="min-h-screen flex flex-col">
-        {children}
+        <AuthProvider>
+          {children}
+        </AuthProvider>
       </body>
     </html>
   )

@@ -6,7 +6,7 @@ const propertyTypes: PropertyType[] = [
   {
     title: "Studio",
     image: "/studio.jpg?height=200&width=300",
-    href: "/studios",
+    href: "/studio",
   },
   {
     title: "Hotels",
