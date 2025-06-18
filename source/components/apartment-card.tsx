@@ -1,7 +1,9 @@
 import Image from "next/image"
+import Link from "next/link"
 import { Card, CardContent } from "@/components/ui/card"
 import { Badge } from "@/components/ui/badge"
 import type { ApartmentCard as ApartmentCardType } from "@/lib/contentful"
+import { Button } from "@/components/ui/button"
 
 interface ApartmentCardProps {
   apartment: ApartmentCardType
@@ -44,6 +46,9 @@ export function ApartmentCard({ apartment, priority = false }: ApartmentCardProp
             </p>
           )}
         </div>
+         <Button asChild className="w-full mt-4">
+          <Link href={`/book-now/1/`}>Book now</Link>
+        </Button>
       </CardContent>
     </Card>
   )

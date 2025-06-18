@@ -1,3 +1,4 @@
+import Link from "next/link"
 import { Button } from "@/components/ui/button"
 import { Card, CardContent } from "@/components/ui/card"
 import Image from "next/image"
@@ -65,7 +66,9 @@ export function HighestRated() {
                     </li>
                   ))}
                 </ul>
-                <Button className="w-full">Book now</Button>
+                <Button asChild className="w-full mt-4">
+                  <Link href={`/book-now/2`}>Book now</Link>
+                </Button>
               </div>
             </CardContent>
           </Card>
