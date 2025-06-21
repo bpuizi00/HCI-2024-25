@@ -37,8 +37,13 @@ export function PropertyCard({ property }: { property: Property }) {
             <p className="text-sm text-gray-600">{property.dateRange}</p>
           )}
         </div>
-        <Link href={`/book-now/${property.id}`}>
-          <Button>Book now</Button>
+        <Link href={`/book-now/`}>
+          <Button
+            asChild
+            className="w-full mt-4 bg-black text-white hover:bg-blue-600"
+            >
+            <span>Book now</span>
+          </Button>
         </Link>
       </CardFooter>
     </Card>

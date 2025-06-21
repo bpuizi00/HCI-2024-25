@@ -4,6 +4,7 @@ import { Card, CardContent } from "@/components/ui/card"
 import { Badge } from "@/components/ui/badge"
 import type { ApartmentCard as ApartmentCardType } from "@/lib/contentful"
 import { Button } from "@/components/ui/button"
+import React, { useEffect, useState } from "react"
 
 interface ApartmentCardProps {
   apartment: ApartmentCardType
@@ -11,6 +12,29 @@ interface ApartmentCardProps {
 }
 
 export function ApartmentCard({ apartment, priority = false }: ApartmentCardProps) {
+  const [address, setAddress] = useState<string>("")
+  const [city, setCity] = useState<string>("")
+
+  useEffect(() => {
+    async function fetchAddress() {
+      if (!apartment.location) return
+      try {
+        const res = await fetch(
+          `https://nominatim.openstreetmap.org/reverse?format=json&lat=${apartment.location.lat}&lon=${apartment.location.lon}`
+        )
+        const data = await res.json()
+        // Extract first 3 words from display_name
+        const firstThreeWords = data.display_name
+          ? data.display_name.split(" ").slice(0, 4).join(" ").replace(/,$/, "")
+          : "Unknown address"
+        setAddress(firstThreeWords)
+      } catch (error) {
+        setAddress("Unknown address")
+      }
+    }
+    fetchAddress()
+  }, [apartment.location])
+
   return (
     <Card className="overflow-hidden">
       <div className="relative h-64">
@@ -42,13 +66,35 @@ export function ApartmentCard({ apartment, priority = false }: ApartmentCardProp
           {apartment.price && <p className="font-semibold text-base">Price: {apartment.price}</p>}
           {apartment.location && (
             <p>
-              Location: {apartment.location.lat.toFixed(6)}, {apartment.location.lon.toFixed(6)}
+              Location:{" "}
+              {address ? (
+                <a
+                  href={`https://www.google.com/maps/search/?api=1&query=${apartment.location.lat},${apartment.location.lon}`}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="text-blue-600 underline"
+                >
+                  {address}
+                  {city && ` (${city})`}
+                </a>
+              ) : (
+                <span>
+                  Loading address...
+                </span>
+              )}
             </p>
           )}
         </div>
-         <Button asChild className="w-full mt-4">
-          <Link href={`/book-now/1/`}>Book now</Link>
+        {apartment.availability && (
+         <Button asChild className="w-full mt-4 hover:bg-blue-600">
+          <Link href={`/book-now/`}>Book now</Link>
         </Button>
+        )}
+        {!apartment.availability && (
+          <Button asChild className="w-full mt-4 bg-red-600" disabled>
+            <span>Booked</span>
+          </Button>
+        )}
       </CardContent>
     </Card>
   )

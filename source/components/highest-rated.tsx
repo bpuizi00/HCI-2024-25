@@ -66,8 +66,8 @@ export function HighestRated() {
                     </li>
                   ))}
                 </ul>
-                <Button asChild className="w-full mt-4">
-                  <Link href={`/book-now/2`}>Book now</Link>
+                <Button asChild className="w-full mt-4 hover:bg-blue-600">
+                  <Link href={`/book-now/`}>Book now</Link>
                 </Button>
               </div>
             </CardContent>

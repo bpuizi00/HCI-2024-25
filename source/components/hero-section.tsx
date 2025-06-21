@@ -11,7 +11,7 @@ import { format } from "date-fns"
 export function HeroSection() {
   const [checkIn, setCheckIn] = useState<Date>()
   const [checkOut, setCheckOut] = useState<Date>()
-  const [guests, setGuests] = useState(1)
+  const [guests, setGuests] = useState('')
   const [location, setLocation] = useState('')
   const [showMsg, setShowMsg] = useState(false)
 
@@ -96,9 +96,12 @@ export function HeroSection() {
                       id="guests"
                       type="number"
                       value={guests}
-                      onChange={(e) => setGuests(Number(e.target.value))}
+                      onChange={(e) => {
+                        const value = e.target.value;
+                        setGuests(value);
+                      }}
                       className="w-full px-3 py-2 border rounded-md"
-                      min="1"
+                      placeholder="Number of guests"
                     />
                   </div>
                 </div>
