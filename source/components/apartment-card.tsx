@@ -91,7 +91,7 @@ export function ApartmentCard({ apartment, priority = false }: ApartmentCardProp
         </Button>
         )}
         {!apartment.availability && (
-          <Button asChild className="w-full mt-4 bg-red-600" disabled>
+          <Button asChild className="w-full mt-4 bg-red-600 hover:bg-red-600" disabled>
             <span>Booked</span>
           </Button>
         )}
